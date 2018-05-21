@@ -1,0 +1,4 @@
+###### Requirements with Version Specifiers ######
+numpy
+matplotlib
+pandas

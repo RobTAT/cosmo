@@ -1,17 +1,56 @@
-__author__ = 'yuafan'
+'''
+Copyright (C) Yuantao Fan. All rights reserved.
+Author: Yuantao Fan
+This file is part of Arrangement Library.
+The of Arrangement Library is free software: you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation, either version 3 of the License,
+or (at your option) any later version.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+You should have received a copy of the GNU Lesser General Public License along
+with this program. If not, see <http://www.gnu.org/licenses/>
+'''
+# __author__ = 'yuafan'
 
-import cosmo_v0.metrics as metrics
+from __future__ import print_function, division
 
-import COSMO.Parameters_VACT as pv
-import COSMO.Metrics as cm_
+
+import cosmo_v0.metrics as metrics # TODO: what is "cosmo_v0"?
+
+import COSMO.Parameters_VACT as pv # TODO: what is "COSMO"?
+import COSMO.Metrics as cm_  # TODO: what is "COSMO"?
+
+
 import numpy as np
 import math
-import copy
+import copy # TODO: do you need this package here?
 
-
+################################################################################
 class Anomaly(object):
+    '''TODO:
 
+    '''
+
+    ########################################
     def __init__(self, n_units, n_variations):
+        ''' TODO:
+        <short description of the method>
+        
+        Inputs
+        ------
+        
+        Parameters
+        ----------
+        
+        Output
+        ------
+        
+        Usage Example
+        -------------
+        
+        '''
         self.n_units = n_units
         self.n_variations = n_variations
 
@@ -22,10 +61,32 @@ class Anomaly(object):
         self.distance = None
         self.distance_matrix = None
 
+    ########################################
     def set_samples(self, samples):
+        ''' TODO:
+        <short description of the method>
+        
+        Input
+        -----
+
+        Usage Example
+        -------------
+        '''
+
         self.models_samples = samples
 
+    ########################################
     def set_distance(self, distance='Hellinger'):
+        ''' TODO:
+        <short description of the method>
+
+        Paramters
+        ---------
+        
+        Usage Example
+        -------------
+        
+        '''
         if distance == 'Hellinger':
             self.distance = metrics.hellinger
         if distance == 'EMD':
@@ -37,10 +98,17 @@ class Anomaly(object):
         if distance == 'Cosine':
             self.distance = metrics.cosine
 
+    ########################################
     def compute_distance_matrix(self):
+        ''' TODO:
+        <short description of the method>
+        
+        Usage Example
+        -------------
+        
+        '''
 
-        def symmetrize(a):
-            return a + a.T - np.diag(a.diagonal())
+        symmetrize = lambda a: a + a.T - np.diag(a.diagonal())
 
         n_samples = self.n_units * self.n_variations
         distance_matrix = np.zeros((n_samples, n_samples))
@@ -63,8 +131,16 @@ class Anomaly(object):
         #return symmetrize(distance_matrix)
         self.distance_matrix = symmetrize(distance_matrix)
 
+        
+    ########################################
     def get_z_score(self):
-
+        ''' TODO:
+        <short description of the method>
+                
+        Usage Example
+        -------------
+        
+        '''
         n_var = self.n_variations
 
         z_score_samples = np.zeros(self.n_units)
@@ -116,9 +192,22 @@ class Anomaly(object):
 
         return z_score_samples
 
-
+################################################################################
 def compute_p_value(z_scores):
-
+    ''' TODO:
+    <short description of the method>
+    
+    Inputs
+    ------
+    
+    Output
+    ------
+    
+    Usage Example
+    -------------
+    
+    '''
+    
     # bundle for calculating p value
     def norm_cdf(x, mu, sigma):
         t = x-mu
@@ -145,9 +234,25 @@ def compute_p_value(z_scores):
     return get_arithmetic_p_val(float(np.nansum(z_scores))/n_real, np.count_nonzero(~np.isnan(z_scores)) )
 
 
+################################################################################
 def get_p_val(z_scores, period=30):
-
-    import math
+        ''' TODO:
+        <short description of the method>
+        
+        Inputs
+        ------
+        
+        Parameters
+        ----------
+        
+        Output
+        ------
+        
+        Usage Example
+        -------------
+        
+        '''
+    import math # TODO: does this need to be here?
     p_val = np.arange(len(z_scores), dtype=np.float)
 
     for i in range(period):
