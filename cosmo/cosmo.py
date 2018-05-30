@@ -16,16 +16,9 @@ with this program. If not, see <http://www.gnu.org/licenses/>
 
 from __future__ import print_function, division
 
-
-import cosmo_v0.metrics as metrics # TODO: what is "cosmo_v0"?
-
-import COSMO.Parameters_VACT as pv # TODO: what is "COSMO"?
-import COSMO.Metrics as cm_  # TODO: what is "COSMO"?
-
-
 import numpy as np
 import math
-import copy # TODO: do you need this package here?
+import cosmo.metrics as metrics
 
 ################################################################################
 class Anomaly(object):
@@ -236,23 +229,23 @@ def compute_p_value(z_scores):
 
 ################################################################################
 def get_p_val(z_scores, period=30):
-        ''' TODO:
-        <short description of the method>
-        
-        Inputs
-        ------
-        
-        Parameters
-        ----------
-        
-        Output
-        ------
-        
-        Usage Example
-        -------------
-        
-        '''
-    import math # TODO: does this need to be here?
+    ''' TODO:
+    <short description of the method>
+
+    Inputs
+    ------
+
+    Parameters
+    ----------
+
+    Output
+    ------
+
+    Usage Example
+    -------------
+
+    '''
+
     p_val = np.arange(len(z_scores), dtype=np.float)
 
     for i in range(period):

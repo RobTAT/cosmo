@@ -37,7 +37,7 @@ def get_models(df_flow_dict, sample_size=24, sample_id=[]):
 
     model_samples = [[] for isamples in range(len(sample_id))]
 
-    for i_interval in range(len(timeline)/sample_size):
+    for i_interval in range(int(len(timeline)/sample_size)):
 
         for i_sample, sample in enumerate(sample_id):
 
@@ -62,7 +62,7 @@ def get_samples_time_interval_wise(model_pack):
 model_samples_ = get_models(df_flow, sample_size=24, sample_id=sample_id)
 model_samples_tw = get_samples_time_interval_wise(model_samples_)
 
-import cosmo_v0.cosmo as cosmo
+import cosmo.cosmo as cosmo
 
 n_unit, n_var = len(sample_id), 7
 
