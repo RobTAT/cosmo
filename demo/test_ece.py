@@ -5,7 +5,17 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-data_dir = '/Users/yuafan/Desktop/SideProj/ece/test_data.xlsx'
+import math
+
+import sys
+if not( u'../' in sys.path): sys.path.append( u'../' )
+
+import cosmo.cosmo as cosmo
+reload(cosmo)
+
+
+data_dir = '../sample_data/ece_test_data.xlsx'
+
 
 df_flow = pd.read_excel(data_dir, 'Energy', skiprows=1, index_col='Row Labels')
 df_flow.fillna(0,inplace=True)
@@ -62,7 +72,7 @@ def get_samples_time_interval_wise(model_pack):
 model_samples_ = get_models(df_flow, sample_size=24, sample_id=sample_id)
 model_samples_tw = get_samples_time_interval_wise(model_samples_)
 
-import cosmo.cosmo as cosmo
+
 
 n_unit, n_var = len(sample_id), 7
 
@@ -92,7 +102,7 @@ z_scores, p_val_timeline = [], []
 
 for idays in range(n_var, len(tl)):
 
-    print(idays)
+    ## print(idays)
     p_val_timeline.append(tl[idays])
     group_tmp = cosmo.Anomaly(n_unit, n_var)
     set_samples(model_samples_tw[idays-n_var:idays], group_tmp)
@@ -119,7 +129,7 @@ p_val = []
 
 def get_p_val(z_scores, period=30):
 
-    import math
+
     p_val = np.arange(len(z_scores), dtype=np.float)
 
     for i in range(period):
@@ -129,15 +139,15 @@ def get_p_val(z_scores, period=30):
 
     for i in range(period, len(z_scores)):
         x = np.array(z_scores[i-period:i])[~np.isnan(z_scores[i-period:i])]
-        #print(np.mean(x))
-        print(i, x)
-        print(i, x.size)
-        print(i, np.mean(x))
+        ### print(np.mean(x))
+        ## print(i, x)
+        ## print(i, x.size)
+        ## print(i, np.mean(x))
         p_val[i] = cosmo.compute_p_value(x) if x.size >= 1 else np.nan
         p_val[i] = float(-math.log10(p_val[i])) if not np.isnan(p_val[i]) else np.nan
         #averagedPval[i] = float(-math.log10(stats.t.sf(np.abs(tmp_d5), 3600-1)*2)) if not np.isnan(averagedPval[i]) else np.nan
 
-        print(p_val[i])
+        ## print(p_val[i])
 
     return p_val
 
@@ -149,7 +159,6 @@ for ibus in range(n_unit):
 
 def plot_allrepair(P_value, P_value_delta, timeline, info='', thresh_ = 5):
 
-    import matplotlib.pyplot as plt
     idx_ = range(12)
     plt.clf()
     
@@ -166,7 +175,7 @@ def plot_allrepair(P_value, P_value_delta, timeline, info='', thresh_ = 5):
         if len(timeline) != len(Pval):
             xdat = timeline[6:]
 
-        print(len(xdat), len(Pval))
+        ## print(len(xdat), len(Pval))
 
 
         ss = timeline[0]
@@ -184,12 +193,12 @@ def plot_allrepair(P_value, P_value_delta, timeline, info='', thresh_ = 5):
         #axarr[r].axhline(y = thresh_, color='#cdc9c9')
 
     f.tight_layout()
-    plt.savefig('/Users/yuafan/Desktop/busData/ece_test_2am_energy.png')
+    fname = 'ece_test_2am_z_energy.png'
+    plt.savefig(fname)
 
 
 def plot_all_z_score(P_value, P_value_delta, timeline, info='', thresh_ = 5):
 
-    import matplotlib.pyplot as plt
     idx_ = range(12)
     plt.clf()
     f, axarr = plt.subplots(12, 1, figsize=(15, 20), dpi=500, facecolor='w', edgecolor='k')
@@ -206,7 +215,7 @@ def plot_all_z_score(P_value, P_value_delta, timeline, info='', thresh_ = 5):
         if len(timeline) != len(Pval):
             xdat = timeline[6:]
 
-        print(len(xdat), len(Pval))
+        ## print(len(xdat), len(Pval))
 
         #ss = tu.get_delta_ms(tu.gen_datetime_ymd(2011,6,16))
         #ee = tu.get_delta_ms(tu.gen_datetime_ymd(2015,10,8))
@@ -226,8 +235,8 @@ def plot_all_z_score(P_value, P_value_delta, timeline, info='', thresh_ = 5):
         #axarr[r].axhline(y = thresh_, color='#cdc9c9')
 
     f.tight_layout()
-    plt.savefig('/Users/yuafan/Desktop/busData/ece_test_2am_z_energy.png')
-
+    fname = 'ece_test_2am_z_energy.png'
+    plt.savefig(fname)
 
 plot_allrepair(p_val, p_val, p_val_timeline)
 plot_all_z_score(z_scores_buswise, z_scores_buswise, p_val_timeline)

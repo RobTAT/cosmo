@@ -22,6 +22,7 @@ python setup.py install
 <!-- ``` -->
 
 ## Laundry List
+- [ ] make all prints conditional on verbose flag
 - [ ] fill all the doc strings
 - [ ] profile the code.
 - [ ] test suite.

@@ -18,7 +18,7 @@ from __future__ import print_function, division
 
 import numpy as np
 import math
-import cosmo.metrics as metrics
+import metrics as metrics
 
 ################################################################################
 class Anomaly(object):
