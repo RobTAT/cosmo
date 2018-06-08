@@ -1,5 +1,15 @@
 __author__ = 'yuafan'
 
+# imports
+
+# function
+
+# script
+# input parameter output
+
+# visualization
+
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -21,7 +31,7 @@ for i_nn in range(nn_faulty_samples):
 
     for i_time in range(time_span):
 
-        healthy_sample_pack.append()
+        healthy_sample_pack[i_nn][i_time].append(np.random.normal(healthy_meta_distr[i_time][0], healthy_meta_distr[i_time][1], nn_observations))
 
 healthy_pack = [np.random.normal(distr[0], distr[1], nn_observations) for distr in healthy_meta_distr]
 faulty_pack = [np.random.normal(distr[0], distr[1], nn_observations) for distr in faulthy_meta_distr_type_a]

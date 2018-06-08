@@ -22,15 +22,15 @@ def compute_derivative(time_series, n_step):
 
     Inputs
     ------
-    time_series: a 1d-vector | list or array
+    time_series: np.array, 1d | list, 1d
 
     Parameters
     ----------
-    n_step: step for computing derivatives
+    n_step: integer, step for computing derivatives
 
     Output
     ------
-    a 1d-vector
+    list, 1d vector
 
     Usage Example
     -------------
@@ -53,7 +53,7 @@ def compute_histogram(value, bin_=[], range_=[], density_ = True):
     
     Inputs
     ------
-    value: 1d vector | list or array
+    value: np.array, 1d | list, 1d
     
     Parameters
     ----------
@@ -63,7 +63,7 @@ def compute_histogram(value, bin_=[], range_=[], density_ = True):
 
     Output
     ------
-    count: 1d vector | density
+    count:  list, 1d density of value
 
     Usage Example
     -------------

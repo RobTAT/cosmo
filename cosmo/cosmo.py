@@ -24,6 +24,8 @@ import metrics as metrics
 class Anomaly(object):
     '''TODO:
 
+    Samples with its observations that came from a population.
+
     '''
 
     ########################################
@@ -33,13 +35,9 @@ class Anomaly(object):
         
         Inputs
         ------
-        
-        Parameters
-        ----------
-        
-        Output
-        ------
-        
+        n_units: integer, number of samples
+        n_variations: integer, number of observations from each sample
+
         Usage Example
         -------------
         
@@ -61,6 +59,7 @@ class Anomaly(object):
         
         Input
         -----
+        samples: list of lists, observations of samples
 
         Usage Example
         -------------
@@ -73,8 +72,12 @@ class Anomaly(object):
         ''' TODO:
         <short description of the method>
 
+        Set type of metric for comparing two feature vectors
+
         Paramters
         ---------
+
+        distance: string, e.g. 'Hellinger', 'EMD', 'Euclidean', 'Cityblock' ...
         
         Usage Example
         -------------
@@ -94,7 +97,8 @@ class Anomaly(object):
     ########################################
     def compute_distance_matrix(self):
         ''' TODO:
-        <short description of the method>
+        Compute pair-wise distance matrix for all pairs of sample observations
+
         
         Usage Example
         -------------
@@ -128,7 +132,9 @@ class Anomaly(object):
     ########################################
     def get_z_score(self):
         ''' TODO:
-        <short description of the method>
+        Compute z score based on distance matrix, Most Central Pattern mode
+
+        TODO: add knn mode
                 
         Usage Example
         -------------
@@ -188,13 +194,15 @@ class Anomaly(object):
 ################################################################################
 def compute_p_value(z_scores):
     ''' TODO:
-    <short description of the method>
-    
+    Uniformity test: compute p-value of the test based on z scores given
+
     Inputs
     ------
+    z_scores: np.array | list of float
     
     Output
     ------
+    p-value: float
     
     Usage Example
     -------------
@@ -230,16 +238,19 @@ def compute_p_value(z_scores):
 ################################################################################
 def get_p_val(z_scores, period=30):
     ''' TODO:
-    <short description of the method>
+    Compute p values for a full z-score sequence
 
     Inputs
     ------
+    z_scores: np.array, 1d | list of floats
 
     Parameters
     ----------
+    period: integer, window size for computing uniformity test
 
     Output
     ------
+    p_val: np.array, 1d a sequence of p-values indicate how different a sample is compare to its peers
 
     Usage Example
     -------------
