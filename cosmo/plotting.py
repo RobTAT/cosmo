@@ -1,32 +1,23 @@
+'''
+Copyright (C) Yuantao Fan. All rights reserved.
+Author: Yuantao Fan
+This file is part of Arrangement Library.
+The of Arrangement Library is free software: you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation, either version 3 of the License,
+or (at your option) any later version.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+You should have received a copy of the GNU Lesser General Public License along
+with this program. If not, see <http://www.gnu.org/licenses/>
+'''
 __author__ = 'yuafan'
 
-import numpy as np, matplotlib.pyplot as plt
-import cosmo, math
+import numpy as np
+import matplotlib.pyplot as plt
 
-def get_p_val(z_scores, period=30):
-
-    p_val = np.arange(len(z_scores), dtype=np.float)
-
-    for i in range(period):
-        x = np.array(z_scores[:i])[~np.isnan(z_scores[:i])]
-        p_val[i] = cosmo.compute_p_value(x) if x.size >= 1 else np.nan
-        p_val[i] = float(-math.log10(p_val[i])) if not np.isnan(p_val[i]) else np.nan
-
-    for i in range(period, len(z_scores)):
-        x = np.array(z_scores[i-period:i])[~np.isnan(z_scores[i-period:i])]
-        ### print(np.mean(x))
-        ## print(i, x)
-        ## print(i, x.size)
-        ## print(i, np.mean(x))
-        p_val[i] = cosmo.compute_p_value(x) if x.size >= 1 else np.nan
-        p_val[i] = float(-math.log10(p_val[i])) if not np.isnan(p_val[i]) else np.nan
-        #averagedPval[i] = float(-math.log10(stats.t.sf(np.abs(tmp_d5), 3600-1)*2)) if not np.isnan(averagedPval[i]) else np.nan
-
-        ## print(p_val[i])
-
-    return p_val
-
-
+################################################################################
 def plot_allrepair(P_value, P_value_delta, timeline, info='', thresh_ = 5):
 
     idx_ = range(12)
@@ -66,7 +57,7 @@ def plot_allrepair(P_value, P_value_delta, timeline, info='', thresh_ = 5):
     fname = 'ece_test_2am_z_energy.png'
     plt.savefig(fname)
 
-
+################################################################################
 def plot_all_z_score(P_value, P_value_delta, timeline, info='', thresh_ = 5):
 
     idx_ = range(12)

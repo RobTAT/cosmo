@@ -1,5 +1,5 @@
 # cosmo
-Consensus Self-Organizing Models (COSMO)
+A Python implementation of *"Consensus Self-Organizing Models (COSMO)"*.
 
 ## Dependencies and Download
 Download, installing dependencies, and install package
@@ -22,6 +22,8 @@ python setup.py install
 <!-- ``` -->
 
 ## Laundry List
+- [ ] add the specific version for the packages in "reguirements.txt".
+- [ ] add a link to a paper in which COSMO is proposed/described.
 - [ ] make all prints conditional on verbose flag
 - [ ] fill all the doc strings
 - [ ] profile the code.
